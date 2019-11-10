@@ -66,7 +66,7 @@ def print_board(board):
 
 def test_find_stones_1():
     fig, ax = plt.subplots(1, 1, figsize=(30,20))
-    img = io.imread('examples/t1_006.jpg', as_gray=False)
+    img = io.imread('examples/t1_006.jpg')
     (height, width, colors) = img.shape
     tl = [125, 390]
     tr = [110, width-398]
@@ -81,12 +81,28 @@ def test_find_stones_1():
 
 def test_find_stones_2():
     fig, ax = plt.subplots(1, 1, figsize=(30,20))
-    img = io.imread('examples/t3_004.jpg', as_gray=False)
+    img = io.imread('examples/t3_004.jpg')
     (height, width, colors) = img.shape
     tl = [28, 142]
     tr = [20, width-92]
     br = [height-37, width-13]
     bl = [height-72, 28]
+    board = find_stones(img, 19, (tl, tr, br, bl))
+    print_board(board)
+    
+    io.imshow(img)
+    points = np.array([tl, tr, br, bl, tl])
+    ax.plot(points[:,1], points[:,0], marker='o', markersize=30)
+    plt.savefig('res.png')
+
+def test_find_stones_3():
+    fig, ax = plt.subplots(1, 1, figsize=(30,20))
+    img = io.imread('examples/t2_100.jpg')
+    (height, width, colors) = img.shape
+    tl = [53, 117]
+    tr = [40, width-120]
+    br = [height-32, width-20]
+    bl = [height-32, 18]
     board = find_stones(img, 19, (tl, tr, br, bl))
     print_board(board)
     
@@ -105,4 +121,4 @@ def test_peaks_detection():
     io.imshow(img)
     plt.savefig('res.png')
 
-test_find_stones_1()
+test_find_stones_3()
